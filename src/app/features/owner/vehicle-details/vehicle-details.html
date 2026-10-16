@@ -1,0 +1,296 @@
+<div class="details-page">
+
+  <div class="page-container">
+
+    <!-- Back Navigation -->
+    <button
+      type="button"
+      class="back-button"
+      (click)="backToDashboard()">
+      ← Back to Dashboard
+    </button>
+
+    <!-- Loading -->
+    <div *ngIf="loading" class="state-card">
+      <h3>Loading Vehicle Details...</h3>
+      <p>Please wait while we fetch your vehicle information.</p>
+    </div>
+
+    <!-- Error -->
+    <div *ngIf="!loading && error" class="state-card error-card">
+      <h3>Unable to Load Vehicle</h3>
+      <p>{{ error }}</p>
+    </div>
+
+    <!-- Vehicle Details -->
+    <ng-container *ngIf="!loading && !error && vehicle">
+
+      <!-- Header -->
+      <div class="page-header">
+
+        <div>
+          <p class="eyebrow">VEHICLE MANAGEMENT</p>
+
+          <h1>{{ vehicle.make }} {{ vehicle.model }}</h1>
+
+          <p class="registration">
+            {{ vehicle.registrationNumber }}
+          </p>
+        </div>
+
+        <div
+          class="status-badge"
+          [ngClass]="
+            !lastService
+              ? 'status-neutral'
+              : isOverdue
+                ? 'status-overdue'
+                : 'status-good'
+          ">
+
+          {{
+            !lastService
+              ? 'No Service History'
+              : isOverdue
+                ? 'Service Due'
+                : 'Up to Date'
+          }}
+
+        </div>
+
+      </div>
+
+      <!-- Summary Cards -->
+      <div class="summary-grid">
+
+        <div class="summary-card">
+          <div class="summary-icon">🚘</div>
+
+          <p>Current Mileage</p>
+
+          <h2>
+            {{ vehicle.currentMileage | number }}
+            <span>km</span>
+          </h2>
+        </div>
+
+        <div class="summary-card">
+          <div class="summary-icon">📅</div>
+
+          <p>Last Service</p>
+
+          <h2 class="date-value">
+            {{
+              lastService
+                ? (lastService.serviceDate | date:'dd MMM yyyy')
+                : 'Not Available'
+            }}
+          </h2>
+        </div>
+
+        <div class="summary-card">
+          <div class="summary-icon">🔧</div>
+
+          <p>Next Service Due</p>
+
+          <h2 class="date-value">
+            {{
+              nextServiceDue
+                ? (nextServiceDue | date:'dd MMM yyyy')
+                : 'Not Scheduled'
+            }}
+          </h2>
+        </div>
+
+      </div>
+
+      <!-- Maintenance Status -->
+      <section class="maintenance-card">
+
+        <div class="section-heading">
+          <h2>Maintenance Overview</h2>
+          <p>Current service status of your vehicle</p>
+        </div>
+
+        <div
+          class="maintenance-alert"
+          [ngClass]="
+            !lastService
+              ? 'alert-neutral'
+              : isOverdue
+                ? 'alert-warning'
+                : 'alert-success'
+          ">
+
+          <span class="alert-icon">
+            {{ !lastService ? 'ℹ' : isOverdue ? '⚠' : '✓' }}
+          </span>
+
+          <div>
+
+            <h3>
+              {{
+                !lastService
+                  ? 'No Service Records'
+                  : isOverdue
+                    ? 'Maintenance Required'
+                    : 'Your Vehicle Is Up to Date'
+              }}
+            </h3>
+
+            <p *ngIf="!lastService">
+              No service history is available for this vehicle yet.
+            </p>
+
+            <p *ngIf="lastService && isOverdue">
+              Your vehicle has reached its scheduled service
+              date or mileage interval.
+            </p>
+
+            <p *ngIf="lastService && !isOverdue">
+              Your vehicle is currently within its scheduled
+              maintenance interval.
+            </p>
+
+          </div>
+
+        </div>
+
+        <div class="maintenance-info" *ngIf="lastService">
+
+          <div class="info-item">
+            <p>Last Service Mileage</p>
+
+            <strong>
+              {{ lastService.mileageAtService | number }} km
+            </strong>
+          </div>
+
+          <div class="info-item">
+            <p>Next Service Mileage</p>
+
+            <strong>
+              {{ nextServiceMileage | number }} km
+            </strong>
+          </div>
+
+          <div class="info-item">
+            <p>Next Service Date</p>
+
+            <strong>
+              {{
+                nextServiceDue
+                  ? (nextServiceDue | date:'dd MMM yyyy')
+                  : 'Not Scheduled'
+              }}
+            </strong>
+          </div>
+
+        </div>
+
+      </section>
+
+      <!-- Service History -->
+      <section class="history-card">
+
+        <div class="section-heading">
+          <h2>Service History</h2>
+          <p>
+            Complete maintenance history for this vehicle
+          </p>
+        </div>
+
+        <!-- Empty Service History -->
+        <div
+          class="empty-history"
+          *ngIf="serviceHistory.length === 0">
+
+          <div class="empty-icon">🔧</div>
+
+          <h3>No Service History Yet</h3>
+
+          <p>
+            Service records will appear here when a service
+            center logs maintenance for this vehicle.
+          </p>
+
+        </div>
+
+        <!-- Timeline -->
+        <div
+          class="timeline"
+          *ngIf="serviceHistory.length > 0">
+
+          <div
+            class="timeline-item"
+            *ngFor="let service of serviceHistory; let i = index">
+
+            <div class="timeline-marker">
+              <span></span>
+            </div>
+
+            <div class="timeline-content">
+
+              <div class="timeline-header">
+
+                <div>
+                  <p class="service-label">
+                    {{ i === 0 ? 'LATEST SERVICE' : 'SERVICE RECORD' }}
+                  </p>
+
+                  <h3>
+                    {{ service.serviceDate | date:'dd MMM yyyy' }}
+                  </h3>
+                </div>
+
+                <span class="service-number">
+                  #{{ service.serviceRecordId }}
+                </span>
+
+              </div>
+
+              <div class="service-information">
+
+                <div>
+                  <p>Mileage at Service</p>
+
+                  <strong>
+                    {{ service.mileageAtService | number }} km
+                  </strong>
+                </div>
+
+                <div>
+                  <p>Next Service Due</p>
+
+                  <strong>
+                    {{
+                      service.nextServiceDue
+                        ? (service.nextServiceDue | date:'dd MMM yyyy')
+                        : 'Not Scheduled'
+                    }}
+                  </strong>
+                </div>
+
+              </div>
+
+              <div class="work-done">
+                <p>Work Performed</p>
+
+                <div>
+                  {{ service.workDone || 'No description available.' }}
+                </div>
+              </div>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </section>
+
+    </ng-container>
+
+  </div>
+
+</div>

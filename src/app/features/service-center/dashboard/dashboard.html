@@ -1,0 +1,247 @@
+<div class="dashboard-layout">
+
+  <!-- Sidebar -->
+  <aside class="sidebar">
+
+    <div class="brand">
+      <div class="brand-icon">A</div>
+      <div>
+        <h2>AutoCare<span>Pro</span></h2>
+        <p>SERVICE CENTER PORTAL</p>
+      </div>
+    </div>
+
+    <div class="sidebar-label">WORKSPACE</div>
+
+    <nav class="sidebar-nav">
+      <a class="active">▦ Dashboard</a>
+      <a href="#vehicle-search">🚘 Search Vehicle</a>
+      <a href="#overdue-section">⚠ Overdue Vehicles</a>
+    </nav>
+
+    <div class="sidebar-bottom">
+      <div class="support-card">
+        <h4>Service Center Workspace</h4>
+        <p>
+          Search vehicles, review maintenance history,
+          and record completed services.
+        </p>
+      </div>
+
+      <button class="logout-button" (click)="logout()">
+        ↪ Sign Out
+      </button>
+    </div>
+
+  </aside>
+
+  <!-- Main -->
+  <main class="main-content">
+
+    <header class="topbar">
+      <div>
+        <p class="breadcrumb">SERVICE CENTER / DASHBOARD</p>
+        <h1>Service Center Dashboard</h1>
+        <p class="page-subtitle">
+          Manage vehicle maintenance and service records.
+        </p>
+      </div>
+
+      <div class="header-badge">
+        🔧 Service Center
+      </div>
+    </header>
+
+    <!-- Search Vehicle -->
+    <section id="vehicle-search" class="content-card">
+
+      <div class="section-header">
+        <div>
+          <h2>Search Vehicle</h2>
+          <p>Find a vehicle using its registration number.</p>
+        </div>
+      </div>
+
+      <form class="search-form" (ngSubmit)="searchVehicle()">
+
+        <input
+          type="text"
+          name="registrationNumber"
+          [(ngModel)]="registrationNumber"
+          placeholder="Enter registration number (e.g. MH12AB1234)"
+          autocomplete="off"
+        />
+
+        <button
+          type="submit"
+          class="primary-button"
+          [disabled]="searching">
+
+          {{ searching ? 'Searching...' : 'Search Vehicle' }}
+
+        </button>
+
+      </form>
+
+      <div class="error-message" *ngIf="errorMessage">
+        {{ errorMessage }}
+      </div>
+
+      <!-- Search Result -->
+      <div class="vehicle-result" *ngIf="vehicle">
+
+        <div class="vehicle-result-header">
+
+          <div class="vehicle-icon">🚘</div>
+
+          <div>
+            <p class="vehicle-registration">
+              {{ vehicle.registrationNumber }}
+            </p>
+
+            <h3>{{ vehicle.make }} {{ vehicle.model }}</h3>
+          </div>
+
+        </div>
+
+        <div class="vehicle-info-grid">
+
+          <div>
+            <p>Current Mileage</p>
+            <strong>{{ vehicle.currentMileage | number }} km</strong>
+          </div>
+
+          <div>
+            <p>Total Service Records</p>
+            <strong>{{ serviceHistory.length }}</strong>
+          </div>
+
+        </div>
+
+        <button
+          type="button"
+          class="primary-button"
+          (click)="addService()">
+
+          + Add Service Record
+
+        </button>
+
+      </div>
+
+      <!-- Service History -->
+      <div class="history-section" *ngIf="vehicle">
+
+        <h3>Service History</h3>
+
+        <p *ngIf="loading">Loading service history...</p>
+
+        <p *ngIf="!loading && serviceHistory.length === 0">
+          No service records available.
+        </p>
+
+        <div
+          class="history-item"
+          *ngFor="let service of serviceHistory">
+
+          <div class="history-date">
+            {{ service.serviceDate | date:'dd MMM yyyy' }}
+          </div>
+
+          <div class="history-details">
+
+            <p>
+              <strong>Service Mileage:</strong>
+              {{ service.mileageAtService | number }} km
+            </p>
+
+            <p>
+              <strong>Work Done:</strong>
+              {{ service.workDone }}
+            </p>
+
+            <p>
+              <strong>Next Service Due:</strong>
+              {{
+                service.nextServiceDue
+                  ? (service.nextServiceDue | date:'dd MMM yyyy')
+                  : 'Not Scheduled'
+              }}
+            </p>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+    <!-- Overdue Vehicles -->
+    <section id="overdue-section" class="content-card">
+
+      <div class="section-header">
+        <div>
+          <h2>Overdue Vehicles</h2>
+          <p>Vehicles that may require maintenance attention.</p>
+        </div>
+
+        <span class="count-badge">
+          {{ overdueVehicles.length }} vehicles
+        </span>
+      </div>
+
+      <div *ngIf="loadingOverdue" class="state-message">
+        Loading overdue vehicles...
+      </div>
+
+      <div *ngIf="overdueError" class="error-message">
+        {{ overdueError }}
+      </div>
+
+      <div
+        *ngIf="
+          !loadingOverdue &&
+          !overdueError &&
+          overdueVehicles.length === 0
+        "
+        class="state-message">
+
+        No overdue vehicles found.
+
+      </div>
+
+      <div class="overdue-grid">
+
+        <article
+          class="overdue-card"
+          *ngFor="let overdue of overdueVehicles">
+
+          <div class="overdue-card-header">
+            <span>⚠ SERVICE DUE</span>
+          </div>
+
+          <h3>{{ overdue.make }} {{ overdue.model }}</h3>
+
+          <p class="overdue-registration">
+            {{ overdue.registrationNumber }}
+          </p>
+
+          <div class="overdue-mileage">
+            Current Mileage:
+            <strong>{{ overdue.currentMileage | number }} km</strong>
+          </div>
+
+        </article>
+
+      </div>
+
+    </section>
+
+    <footer class="dashboard-footer">
+      AutoCare Pro · Service Center Management
+    </footer>
+
+  </main>
+
+</div>

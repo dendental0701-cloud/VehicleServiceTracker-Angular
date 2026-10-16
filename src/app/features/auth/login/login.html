@@ -1,0 +1,112 @@
+<div class="login-container">
+
+  <div class="login-card">
+
+    <div class="brand">
+      <div class="brand-icon">🚗</div>
+
+      <h1>Vehicle Service Tracker</h1>
+
+      <p>Manage your vehicles and maintenance</p>
+    </div>
+
+    <div class="role-selector">
+
+      <button
+        type="button"
+        [class.active]="role === 'Owner'"
+        (click)="role = 'Owner'">
+
+        Vehicle Owner
+
+      </button>
+
+      <button
+        type="button"
+        [class.active]="role === 'ServiceCenter'"
+        (click)="role = 'ServiceCenter'">
+
+        Service Center
+
+      </button>
+
+    </div>
+
+    <form (ngSubmit)="onLogin()" #loginForm="ngForm">
+
+      <div class="form-group">
+
+        <label for="email">Email Address</label>
+
+        <input
+          id="email"
+          type="email"
+          name="email"
+          [(ngModel)]="email"
+          required
+          email
+          placeholder="Enter your email"
+          autocomplete="username">
+
+      </div>
+
+      <div class="form-group">
+
+        <label for="password">Password</label>
+
+        <input
+          id="password"
+          type="password"
+          name="password"
+          [(ngModel)]="password"
+          required
+          placeholder="Enter your password"
+          autocomplete="current-password">
+
+      </div>
+
+      <div
+        class="error-message"
+        *ngIf="errorMessage">
+
+        {{ errorMessage }}
+
+      </div>
+
+      <button
+        type="submit"
+        class="login-button"
+        [disabled]="loading || loginForm.invalid">
+
+        {{ loading ? 'Signing in...' : 'Sign In' }}
+
+      </button>
+
+    </form>
+
+    <div class="footer">
+
+      Secure Vehicle Management
+
+    </div>
+
+  </div>
+
+</div>
+
+
+
+
+
+<!-- Why do we use [(ngModel)]?
+For example:
+<input [(ngModel)]="email" name="email">
+
+This binds the input field to the email property in the component.
+When the user enters an email address, Angular updates the property automatically.
+Why do we use *ngIf?
+<div *ngIf="errorMessage">
+  {{ errorMessage }}
+</div>
+
+This displays the error message only when one exists. -->

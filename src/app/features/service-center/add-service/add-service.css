@@ -1,0 +1,413 @@
+:host {
+  display: block;
+  min-height: 100vh;
+  background: #f5f7fb;
+  color: #172033;
+  font-family: Inter, "Segoe UI", Arial, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.service-page {
+  min-height: 100vh;
+}
+
+.page-container {
+  max-width: 1050px;
+  margin: 0 auto;
+  padding: 35px 28px;
+}
+
+/* Navigation */
+
+.back-button {
+  margin-bottom: 28px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: #2866dd;
+  font-size: 13px;
+  font-weight: 650;
+  cursor: pointer;
+}
+
+.back-button:hover {
+  text-decoration: underline;
+}
+
+/* Header */
+
+.page-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  margin-bottom: 28px;
+}
+
+.eyebrow {
+  margin: 0 0 10px;
+  color: #2866dd;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 1.4px;
+}
+
+.page-header h1 {
+  margin: 0;
+  font-size: 31px;
+  font-weight: 750;
+  letter-spacing: -0.8px;
+}
+
+.subtitle {
+  margin: 9px 0 0;
+  color: #7b879a;
+  font-size: 13px;
+}
+
+.header-icon {
+  width: 65px;
+  height: 65px;
+  display: grid;
+  place-items: center;
+  border-radius: 17px;
+  background: #eaf1ff;
+  font-size: 30px;
+}
+
+/* Vehicle Card */
+
+.vehicle-card {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  padding: 22px;
+  margin-bottom: 25px;
+  border: 1px solid #e8edf5;
+  border-radius: 15px;
+  background: #ffffff;
+}
+
+.vehicle-icon {
+  width: 58px;
+  height: 58px;
+  flex-shrink: 0;
+  display: grid;
+  place-items: center;
+  border-radius: 13px;
+  background: #edf3ff;
+  font-size: 29px;
+}
+
+.vehicle-details {
+  flex: 1;
+}
+
+.vehicle-details p {
+  margin: 0 0 7px;
+  color: #2866dd;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 1px;
+}
+
+.vehicle-details h2 {
+  margin: 0 0 7px;
+  font-size: 20px;
+}
+
+.vehicle-details span {
+  color: #8792a5;
+  font-size: 12px;
+  font-weight: 650;
+}
+
+.vehicle-mileage {
+  text-align: right;
+}
+
+.vehicle-mileage p {
+  margin: 0 0 8px;
+  color: #8792a5;
+  font-size: 11px;
+}
+
+.vehicle-mileage strong {
+  font-size: 16px;
+}
+
+/* Form */
+
+.form-card {
+  padding: 30px;
+  border: 1px solid #e8edf5;
+  border-radius: 15px;
+  background: #ffffff;
+  box-shadow: 0 5px 20px rgba(20, 37, 70, 0.03);
+}
+
+.section-heading {
+  padding-bottom: 22px;
+  margin-bottom: 25px;
+  border-bottom: 1px solid #edf0f5;
+}
+
+.section-heading h2 {
+  margin: 0;
+  font-size: 19px;
+}
+
+.section-heading p {
+  margin: 8px 0 0;
+  color: #8792a5;
+  font-size: 12px;
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 23px 20px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+  min-width: 0;
+}
+
+.full-width {
+  grid-column: 1 / -1;
+}
+
+.form-group label {
+  color: #354157;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.form-group label span {
+  color: #e45545;
+}
+
+.form-group input,
+.form-group textarea {
+  width: 100%;
+  padding: 13px 14px;
+  border: 1px solid #dfe5ef;
+  border-radius: 9px;
+  outline: none;
+  background: #ffffff;
+  color: #172033;
+  font: inherit;
+  font-size: 13px;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.form-group input {
+  height: 47px;
+}
+
+.form-group textarea {
+  min-height: 140px;
+  resize: vertical;
+  line-height: 1.7;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+  border-color: #2866dd;
+  box-shadow: 0 0 0 3px rgba(40, 102, 221, 0.1);
+}
+
+.form-group input::placeholder,
+.form-group textarea::placeholder {
+  color: #a7b0bf;
+}
+
+.field-error {
+  color: #d74e40;
+  font-size: 11px;
+}
+
+.textarea-footer {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  color: #8792a5;
+  font-size: 11px;
+}
+
+/* Notice */
+
+.info-notice {
+  display: flex;
+  align-items: flex-start;
+  gap: 11px;
+  margin-top: 28px;
+  padding: 15px;
+  border-radius: 10px;
+  background: #f0f5ff;
+  color: #42649f;
+}
+
+.info-notice span {
+  font-size: 18px;
+}
+
+.info-notice p {
+  margin: 1px 0 0;
+  font-size: 11px;
+  line-height: 1.7;
+}
+
+/* Messages */
+
+.error-message,
+.success-message {
+  margin-top: 18px;
+  padding: 13px;
+  border-radius: 9px;
+  font-size: 12px;
+}
+
+.error-message {
+  background: #fff0ed;
+  color: #c94639;
+}
+
+.success-message {
+  background: #e9f8ef;
+  color: #218452;
+}
+
+/* Actions */
+
+.form-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  margin-top: 30px;
+  padding-top: 23px;
+  border-top: 1px solid #edf0f5;
+}
+
+.primary-button,
+.secondary-button {
+  min-width: 145px;
+  min-height: 44px;
+  padding: 0 18px;
+  border-radius: 9px;
+  font-size: 12px;
+  font-weight: 750;
+  cursor: pointer;
+}
+
+.primary-button {
+  border: 0;
+  background: #2866dd;
+  color: white;
+}
+
+.primary-button:hover:not(:disabled) {
+  background: #1d55c2;
+}
+
+.primary-button:disabled {
+  opacity: 0.65;
+  cursor: not-allowed;
+}
+
+.secondary-button {
+  border: 1px solid #dfe5ef;
+  background: white;
+  color: #59667b;
+}
+
+.secondary-button:hover {
+  background: #f5f7fb;
+}
+
+/* States */
+
+.state-card {
+  padding: 50px 20px;
+  border: 1px solid #e8edf5;
+  border-radius: 15px;
+  background: white;
+  text-align: center;
+}
+
+.state-card h3 {
+  margin: 0 0 12px;
+}
+
+.state-card p {
+  color: #8792a5;
+  font-size: 12px;
+  line-height: 1.7;
+}
+
+.error-state h3 {
+  color: #d74e40;
+}
+
+/* Footer */
+
+.page-footer {
+  padding-top: 25px;
+  color: #98a2b2;
+  font-size: 11px;
+  text-align: center;
+}
+
+/* Responsive */
+
+@media (max-width: 650px) {
+  .page-container {
+    padding: 24px 15px;
+  }
+
+  .page-header h1 {
+    font-size: 25px;
+  }
+
+  .header-icon {
+    width: 50px;
+    height: 50px;
+    font-size: 25px;
+  }
+
+  .vehicle-card {
+    flex-wrap: wrap;
+  }
+
+  .vehicle-mileage {
+    width: 100%;
+    text-align: left;
+  }
+
+  .form-card {
+    padding: 22px 17px;
+  }
+
+  .form-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .full-width {
+    grid-column: auto;
+  }
+
+  .form-actions {
+    flex-direction: column-reverse;
+  }
+
+  .primary-button,
+  .secondary-button {
+    width: 100%;
+  }
+}

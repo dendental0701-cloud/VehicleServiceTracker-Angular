@@ -1,0 +1,182 @@
+<div class="page-container">
+
+  <header class="page-header">
+    <a routerLink="/owner/dashboard" class="back-link">
+      ← Back to Dashboard
+    </a>
+
+    <div class="header-content">
+      <div>
+        <p class="eyebrow">VEHICLE MANAGEMENT</p>
+        <h1>Add New Vehicle</h1>
+        <p class="subtitle">
+          Register your vehicle to track its service history and maintenance.
+        </p>
+      </div>
+
+      <div class="header-icon">🚘</div>
+    </div>
+  </header>
+
+  <div class="form-card">
+
+    <div class="form-heading">
+      <h2>Vehicle Information</h2>
+      <p>Enter your vehicle details below.</p>
+    </div>
+
+    <form [formGroup]="vehicleForm" (ngSubmit)="saveVehicle()">
+
+      <div class="form-grid">
+
+        <div class="form-group full-width">
+          <label for="registrationNumber">
+            Registration Number <span>*</span>
+          </label>
+
+          <input
+            id="registrationNumber"
+            type="text"
+            formControlName="registrationNumber"
+            placeholder="e.g. MH12AB1234"
+            autocomplete="off"
+          />
+
+          <small
+            class="field-error"
+            *ngIf="
+              vehicleForm.controls.registrationNumber.touched &&
+              vehicleForm.controls.registrationNumber.hasError('required')
+            ">
+            Registration number is required.
+          </small>
+
+          <small
+            class="field-error"
+            *ngIf="
+              vehicleForm.controls.registrationNumber.touched &&
+              vehicleForm.controls.registrationNumber.hasError('maxlength')
+            ">
+            Registration number cannot exceed 20 characters.
+          </small>
+        </div>
+
+        <div class="form-group">
+          <label for="make">
+            Vehicle Make <span>*</span>
+          </label>
+
+          <input
+            id="make"
+            type="text"
+            formControlName="make"
+            placeholder="e.g. Kia"
+          />
+
+          <small
+            class="field-error"
+            *ngIf="
+              vehicleForm.controls.make.touched &&
+              vehicleForm.controls.make.hasError('required')
+            ">
+            Vehicle make is required.
+          </small>
+        </div>
+
+        <div class="form-group">
+          <label for="model">
+            Vehicle Model <span>*</span>
+          </label>
+
+          <input
+            id="model"
+            type="text"
+            formControlName="model"
+            placeholder="e.g. Carens Clavis"
+          />
+
+          <small
+            class="field-error"
+            *ngIf="
+              vehicleForm.controls.model.touched &&
+              vehicleForm.controls.model.hasError('required')
+            ">
+            Vehicle model is required.
+          </small>
+        </div>
+
+        <div class="form-group full-width">
+          <label for="currentMileage">
+            Current Mileage (km) <span>*</span>
+          </label>
+
+          <input
+            id="currentMileage"
+            type="number"
+            formControlName="currentMileage"
+            min="0"
+            step="1"
+            placeholder="e.g. 51999"
+          />
+
+          <small class="field-hint">
+            Enter the current odometer reading in kilometres.
+          </small>
+
+          <small
+            class="field-error"
+            *ngIf="
+              vehicleForm.controls.currentMileage.touched &&
+              vehicleForm.controls.currentMileage.invalid
+            ">
+            Enter a valid mileage of zero or greater.
+          </small>
+        </div>
+
+      </div>
+
+      <div class="form-notice">
+        <span>ℹ</span>
+        <p>
+          Your vehicle information will be associated with your authenticated
+          owner account.
+        </p>
+      </div>
+
+      <div class="success-message" *ngIf="successMessage">
+        {{ successMessage }}
+      </div>
+
+      <div class="error-message" *ngIf="errorMessage">
+        {{ errorMessage }}
+      </div>
+
+      <div class="form-actions">
+
+        <button
+          type="button"
+          class="secondary-button"
+          routerLink="/owner/dashboard">
+          Cancel
+        </button>
+
+        <button
+          type="submit"
+          class="primary-button"
+          [disabled]="submitting">
+
+          {{ submitting ? 'Saving Vehicle...' : 'Save Vehicle' }}
+
+        </button>
+
+      </div>
+
+    </form>
+
+  </div>
+
+  <footer class="page-footer">
+    AutoCare Pro · Vehicle Service Management
+  </footer>
+
+</div>

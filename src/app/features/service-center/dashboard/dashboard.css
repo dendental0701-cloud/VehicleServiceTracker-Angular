@@ -1,0 +1,451 @@
+:host {
+  display: block;
+  min-height: 100vh;
+  background: #f5f7fb;
+  font-family: Inter, "Segoe UI", Arial, sans-serif;
+  color: #172033;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.dashboard-layout {
+  display: flex;
+  min-height: 100vh;
+}
+
+/* Sidebar */
+
+.sidebar {
+  width: 255px;
+  min-width: 255px;
+  padding: 28px 18px;
+  background: #111b2e;
+  color: white;
+  display: flex;
+  flex-direction: column;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 38px;
+}
+
+.brand-icon {
+  width: 43px;
+  height: 43px;
+  border-radius: 13px;
+  display: grid;
+  place-items: center;
+  background: #3678f6;
+  font-size: 23px;
+  font-weight: 800;
+}
+
+.brand h2 {
+  margin: 0;
+  font-size: 19px;
+}
+
+.brand h2 span {
+  color: #6fa0ff;
+}
+
+.brand p {
+  margin: 5px 0 0;
+  color: #8190aa;
+  font-size: 9px;
+  letter-spacing: 1.4px;
+}
+
+.sidebar-label {
+  color: #7888a5;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 1.4px;
+  padding: 0 12px;
+  margin-bottom: 15px;
+}
+
+.sidebar-nav {
+  display: grid;
+  gap: 8px;
+}
+
+.sidebar-nav a {
+  display: block;
+  padding: 14px;
+  color: #aebbd0;
+  border-radius: 10px;
+  text-decoration: none;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.sidebar-nav a:hover,
+.sidebar-nav a.active {
+  background: #2866dd;
+  color: white;
+}
+
+.sidebar-bottom {
+  margin-top: auto;
+}
+
+.support-card {
+  padding: 18px;
+  margin-bottom: 18px;
+  border-radius: 13px;
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.support-card h4 {
+  margin: 0 0 9px;
+  font-size: 13px;
+}
+
+.support-card p {
+  margin: 0;
+  color: #9ba9c0;
+  font-size: 11px;
+  line-height: 1.7;
+}
+
+.logout-button {
+  width: 100%;
+  padding: 13px;
+  border: 0;
+  border-radius: 9px;
+  background: transparent;
+  color: #b5c1d3;
+  text-align: left;
+  cursor: pointer;
+}
+
+.logout-button:hover {
+  background: rgba(255, 255, 255, 0.06);
+}
+
+/* Main */
+
+.main-content {
+  flex: 1;
+  min-width: 0;
+  padding: 35px 42px;
+}
+
+.topbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+  margin-bottom: 30px;
+}
+
+.breadcrumb {
+  margin: 0 0 11px;
+  color: #8190a8;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 1.4px;
+}
+
+.topbar h1 {
+  margin: 0;
+  font-size: 30px;
+}
+
+.page-subtitle {
+  margin: 9px 0 0;
+  color: #7b879a;
+  font-size: 13px;
+}
+
+.header-badge {
+  padding: 11px 16px;
+  border-radius: 10px;
+  background: #eaf1ff;
+  color: #2866dd;
+  font-size: 12px;
+  font-weight: 750;
+}
+
+/* Content */
+
+.content-card {
+  padding: 27px;
+  margin-bottom: 25px;
+  border: 1px solid #e8edf5;
+  border-radius: 15px;
+  background: #ffffff;
+}
+
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 23px;
+}
+
+.section-header h2 {
+  margin: 0;
+  font-size: 20px;
+}
+
+.section-header p {
+  margin: 8px 0 0;
+  color: #8792a5;
+  font-size: 12px;
+}
+
+/* Search */
+
+.search-form {
+  display: flex;
+  gap: 12px;
+}
+
+.search-form input {
+  flex: 1;
+  min-width: 0;
+  height: 46px;
+  padding: 0 15px;
+  border: 1px solid #dfe5ef;
+  border-radius: 9px;
+  outline: none;
+  font-size: 13px;
+}
+
+.search-form input:focus {
+  border-color: #2866dd;
+}
+
+.primary-button {
+  padding: 0 20px;
+  min-height: 44px;
+  border: 0;
+  border-radius: 9px;
+  background: #2866dd;
+  color: white;
+  font-size: 12px;
+  font-weight: 750;
+  cursor: pointer;
+}
+
+.primary-button:hover {
+  background: #1d55c2;
+}
+
+.primary-button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.error-message {
+  margin-top: 18px;
+  padding: 13px;
+  border-radius: 9px;
+  background: #fff0ed;
+  color: #c94639;
+  font-size: 12px;
+}
+
+/* Vehicle Result */
+
+.vehicle-result {
+  margin-top: 25px;
+  padding: 23px;
+  border: 1px solid #e3eaf5;
+  border-radius: 13px;
+  background: #fafcff;
+}
+
+.vehicle-result-header {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 20px;
+}
+
+.vehicle-icon {
+  width: 55px;
+  height: 55px;
+  display: grid;
+  place-items: center;
+  border-radius: 13px;
+  background: #eaf1ff;
+  font-size: 27px;
+}
+
+.vehicle-registration {
+  margin: 0 0 7px;
+  color: #2866dd;
+  font-size: 11px;
+  font-weight: 800;
+}
+
+.vehicle-result-header h3 {
+  margin: 0;
+  font-size: 19px;
+}
+
+.vehicle-info-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+  margin-bottom: 23px;
+}
+
+.vehicle-info-grid p {
+  margin: 0 0 8px;
+  color: #8792a5;
+  font-size: 11px;
+}
+
+.vehicle-info-grid strong {
+  font-size: 14px;
+}
+
+/* History */
+
+.history-section {
+  margin-top: 30px;
+}
+
+.history-section h3 {
+  font-size: 17px;
+  margin-bottom: 20px;
+}
+
+.history-item {
+  padding: 18px;
+  margin-bottom: 12px;
+  border: 1px solid #edf0f5;
+  border-radius: 10px;
+}
+
+.history-date {
+  color: #2866dd;
+  font-size: 12px;
+  font-weight: 800;
+  margin-bottom: 13px;
+}
+
+.history-details p {
+  color: #4d5b70;
+  font-size: 12px;
+  line-height: 1.7;
+}
+
+/* Overdue */
+
+.count-badge {
+  padding: 9px 12px;
+  border-radius: 8px;
+  background: #f5f7fb;
+  color: #66738a;
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.state-message {
+  padding: 35px 15px;
+  color: #8792a5;
+  text-align: center;
+  font-size: 13px;
+}
+
+.overdue-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+}
+
+.overdue-card {
+  padding: 20px;
+  border: 1px solid #f3d8d2;
+  border-radius: 12px;
+  background: #fffaf9;
+}
+
+.overdue-card-header {
+  color: #d74e40;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 1px;
+}
+
+.overdue-card h3 {
+  margin: 15px 0 7px;
+  font-size: 17px;
+}
+
+.overdue-registration {
+  color: #8792a5;
+  font-size: 12px;
+}
+
+.overdue-mileage {
+  margin-top: 18px;
+  color: #64748b;
+  font-size: 12px;
+}
+
+.overdue-mileage strong {
+  color: #172033;
+}
+
+/* Footer */
+
+.dashboard-footer {
+  padding-top: 20px;
+  color: #98a2b2;
+  font-size: 11px;
+  text-align: center;
+}
+
+@media (max-width: 900px) {
+  .dashboard-layout {
+    flex-direction: column;
+  }
+
+  .sidebar {
+    width: 100%;
+    min-width: 0;
+  }
+
+  .sidebar-bottom {
+    display: none;
+  }
+
+  .main-content {
+    padding: 25px 18px;
+  }
+}
+
+@media (max-width: 600px) {
+  .topbar {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .search-form {
+    flex-direction: column;
+  }
+
+  .overdue-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .vehicle-info-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .content-card {
+    padding: 20px 16px;
+  }
+}

@@ -1,0 +1,260 @@
+<div class="service-page">
+
+  <div class="page-container">
+
+    <!-- Back Button -->
+    <button
+      type="button"
+      class="back-button"
+      (click)="backToDashboard()">
+      ← Back to Service Center Dashboard
+    </button>
+
+    <!-- Page Header -->
+    <header class="page-header">
+
+      <div>
+        <p class="eyebrow">SERVICE CENTER / VEHICLE MAINTENANCE</p>
+
+        <h1>Add Service Record</h1>
+
+        <p class="subtitle">
+          Record maintenance work completed on a vehicle.
+        </p>
+      </div>
+
+      <div class="header-icon">🔧</div>
+
+    </header>
+
+    <!-- Loading -->
+    <div class="state-card" *ngIf="loadingVehicle">
+      <h3>Loading Vehicle...</h3>
+      <p>Fetching vehicle information.</p>
+    </div>
+
+    <!-- Vehicle Information -->
+    <div class="vehicle-card" *ngIf="!loadingVehicle && vehicle">
+
+      <div class="vehicle-icon">🚘</div>
+
+      <div class="vehicle-details">
+
+        <p>SELECTED VEHICLE</p>
+
+        <h2>{{ vehicle.make }} {{ vehicle.model }}</h2>
+
+        <span>{{ vehicle.registrationNumber }}</span>
+
+      </div>
+
+      <div class="vehicle-mileage">
+
+        <p>Current Mileage</p>
+
+        <strong>
+          {{ vehicle.currentMileage | number }} km
+        </strong>
+
+      </div>
+
+    </div>
+
+    <!-- Service Form -->
+    <section class="form-card" *ngIf="!loadingVehicle && vehicle">
+
+      <div class="section-heading">
+
+        <h2>Service Information</h2>
+
+        <p>
+          Enter the service details below.
+          All fields are required.
+        </p>
+
+      </div>
+
+      <form
+        [formGroup]="serviceForm"
+        (ngSubmit)="saveService()">
+
+        <div class="form-grid">
+
+          <!-- Service Date -->
+          <div class="form-group">
+
+            <label for="serviceDate">
+              Service Date <span>*</span>
+            </label>
+
+            <input
+              id="serviceDate"
+              type="date"
+              formControlName="serviceDate"
+            />
+
+            <small
+              class="field-error"
+              *ngIf="
+                serviceForm.controls.serviceDate.touched &&
+                serviceForm.controls.serviceDate.invalid
+              ">
+              Service date is required.
+            </small>
+
+          </div>
+
+          <!-- Mileage -->
+          <div class="form-group">
+
+            <label for="mileageAtService">
+              Mileage at Service (km) <span>*</span>
+            </label>
+
+            <input
+              id="mileageAtService"
+              type="number"
+              min="0"
+              step="1"
+              formControlName="mileageAtService"
+              placeholder="Enter service mileage"
+            />
+
+            <small
+              class="field-error"
+              *ngIf="
+                serviceForm.controls.mileageAtService.touched &&
+                serviceForm.controls.mileageAtService.invalid
+              ">
+              Enter a valid whole-number mileage.
+            </small>
+
+          </div>
+
+          <!-- Work Done -->
+          <div class="form-group full-width">
+
+            <label for="workDone">
+              Work Performed <span>*</span>
+            </label>
+
+            <textarea
+              id="workDone"
+              rows="6"
+              formControlName="workDone"
+              placeholder="Describe the maintenance work performed. Example: Engine oil changed, oil filter replaced, brake inspection completed."
+            ></textarea>
+
+            <div class="textarea-footer">
+
+              <small>
+                Describe the completed maintenance work.
+              </small>
+
+              <small>
+                {{ serviceForm.controls.workDone.value?.length || 0 }}/5000
+              </small>
+
+            </div>
+
+            <small
+              class="field-error"
+              *ngIf="
+                serviceForm.controls.workDone.touched &&
+                serviceForm.controls.workDone.invalid
+              ">
+              Work description is required and must not exceed 5000 characters.
+            </small>
+
+          </div>
+
+        </div>
+
+        <!-- Information Notice -->
+        <div class="info-notice">
+
+          <span>ℹ</span>
+
+          <p>
+            This service record will be saved against the selected
+            vehicle and associated with your logged-in service center.
+          </p>
+
+        </div>
+
+        <!-- Error -->
+        <div
+          class="error-message"
+          *ngIf="errorMessage">
+
+          {{ errorMessage }}
+
+        </div>
+
+        <!-- Success -->
+        <div
+          class="success-message"
+          *ngIf="successMessage">
+
+          {{ successMessage }}
+
+        </div>
+
+        <!-- Actions -->
+        <div class="form-actions">
+
+          <button
+            type="button"
+            class="secondary-button"
+            (click)="backToDashboard()">
+
+            Cancel
+
+          </button>
+
+          <button
+            type="submit"
+            class="primary-button"
+            [disabled]="submitting">
+
+            {{
+              submitting
+                ? 'Saving Service...'
+                : 'Save Service Record'
+            }}
+
+          </button>
+
+        </div>
+
+      </form>
+
+    </section>
+
+    <!-- Vehicle Load Error -->
+    <div
+      class="state-card error-state"
+      *ngIf="!loadingVehicle && !vehicle">
+
+      <h3>Unable to Load Vehicle</h3>
+
+      <p>{{ errorMessage }}</p>
+
+      <button
+        type="button"
+        class="primary-button"
+        (click)="backToDashboard()">
+
+        Back to Dashboard
+
+      </button>
+
+    </div>
+
+    <footer class="page-footer">
+      AutoCare Pro · Service Center Management
+    </footer>
+
+  </div>
+
+</div>
